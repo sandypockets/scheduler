@@ -12,7 +12,6 @@ export default function InterviewerListItem(props) {
   });
 
   return (
-    // OnClick is not working - 
     <li className={interviewerClass}
         onClick={props.setInterviewer}
       >
