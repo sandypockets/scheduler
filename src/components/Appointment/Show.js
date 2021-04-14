@@ -1,8 +1,8 @@
-import InterviewerList from 'components/InterviewerList';
+// import InterviewerList from 'components/InterviewerList';
 import React from 'react';
 
 export default function Show(props) {
-  console.log("Line 11", props);
+  console.log("Show.js - Line 11", props);
 
   return (
     <main className="appointment__card appointment__card--show">
