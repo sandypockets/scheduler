@@ -4,4 +4,4 @@ export default function getAppointmentsForDay(state, day) {
     return [];
   }
   return filteredDays.appointments.map(id => state.appointments[id]);
-}
+};
