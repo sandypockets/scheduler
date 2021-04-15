@@ -1,89 +1,41 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
-
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment/index";
+import getAppointmentsForDay from "../helpers/selectors"
 
-const appointments = [
-  {
-    id: 1,
-    time: "12pm",
-  },
-  {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  {
-    id: 3,
-    time: "2pm",
-    interview: {
-      student: "Homer Simpson",
-      interviewer: {
-        id: 2,
-        name: "Tori Malcolm",
-        avatar: "https://i.imgur.com/Nmx0Qxo.png",
-      }
-    }
-  },
-  {
-    id: 4,
-    time: "3pm",
-    interview: {
-      student: "Ned Flanders",
-      interviewer: {
-        id: 2,
-        name: "Tori Malcolm",
-        avatar: "https://i.imgur.com/Nmx0Qxo.png",
-      }
-    }
-  },
-  {
-    id: 5,
-    time: "4pm",
-    interview: {
-      student: "Moe Szyslak",
-      interviewer: {
-        id: 3,
-        name: "Mildred Nazir",
-        avatar: "https://i.imgur.com/T2WwVfS.png",
-      }
-    }
-  }
-];
 
 export default function Application(props) {
-  const [days, setDays] = useState([]); 
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
+  const setDay = day => setState({ ...state, day });
 
   useEffect(() => {
-    const url = `/api/days`;
-    axios.get(url)
-      .then((response) => {
-        console.log("Application.js 74:", response.data)
-        console.log("Application.js 75:", response.data[0])
-        setDays(response.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    const daysUrl = `/api/days`;
+    const appointmentsUrl = `/api/appointments`;
+    const interviewersUrl = `/api/interviewers`;
+    const promiseDays = axios.get(daysUrl);
+    const promiseAppointments = axios.get(appointmentsUrl);
+    const promiseInterviewers = axios.get(interviewersUrl);
+    Promise.all([
+      promiseDays,
+      promiseAppointments,
+      promiseInterviewers
+    ]).then((all) => {
+        console.log("90 - All: ", all)
+        setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviers: all[2].data}))
+    })
   }, []);
 
-  const app = appointments.map((apt => {
-    console.log("Application.js - 84", apt) // Remove after debugging
+  const app = getAppointmentsForDay(state, state.day).map((apt) => {
     return (
-      <Appointment 
-        key={apt.id} {... apt}
-      />
+      <Appointment key={apt.id} {...apt} />
     )
-  }))
+  })
 
   return (
     <main className="layout">
@@ -96,9 +48,9 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-            days={days}
-            day={"Monday"}
-            setDay={day => console.log(day)}
+            days={state.days}
+            day={state.day}
+            setDay={setDay}
           />
         </nav>
         <img
@@ -113,4 +65,4 @@ export default function Application(props) {
       </section>
     </main>
   );
-}
+};
