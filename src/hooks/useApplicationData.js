@@ -79,7 +79,7 @@ export default function useApplicationData() {
           ...state.appointments,
           [id]: interview
         };
-        const days = state.days.map(day => {
+        state.days.map(day => {
           return (day.id === confirmDay(id) ? { ...day, spots: day.spots + 1 } : { ...day });
         });
         setState(prev => {
