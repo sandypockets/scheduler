@@ -69,7 +69,6 @@ export default function useApplicationData() {
     });
   };
 
-
   function cancelInterview(id) {
     return axios.delete(`/api/appointments/${id}`)
       .then(() => {
@@ -91,7 +90,7 @@ export default function useApplicationData() {
         })
       })
     };
-
+    
   return {
     state,
     setDay,
