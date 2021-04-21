@@ -1,14 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
-
-import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
+import "components/InterviewerList.scss";
 
 export default function InterviewerList(props) {
   const { interviewers } = props;
 
   if (interviewers) {
-
     const interviewer = interviewers.map((int) => {
       return (
         <InterviewerListItem
@@ -30,9 +28,7 @@ export default function InterviewerList(props) {
     )
 
   }
-  
   return null;
-  
 }
 
 InterviewerList.propTypes = {
