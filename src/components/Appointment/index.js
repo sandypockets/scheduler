@@ -1,13 +1,13 @@
 import React from 'react';
-import 'components/Appointment/styles.scss';
+import Confirm from './Confirm';
+import Empty from '../Appointment/Empty';
+import Error from './Error';
+import Form from '../Appointment/Form';
 import Header from '../Appointment/Header';
 import Show from '../Appointment/Show';
-import Empty from '../Appointment/Empty';
-import Form from '../Appointment/Form';
 import Status from '../Appointment/Status';
 import useVisualMode from '../../hooks/useVisualMode';
-import Confirm from './Confirm';
-import Error from './Error';
+import 'components/Appointment/styles.scss';
 
 
 export default function Appointment(props) {
@@ -61,11 +61,11 @@ export default function Appointment(props) {
     back()
   };
 
-
+console.log("LINE 64 ------", props)
 return (
-    <article className='appointment'>
+    <article className='appointment' data-testid="appointment">
       <Header time={props.time} />
-      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+      {mode === EMPTY && <Empty alt='Add' onAdd={() => transition(CREATE)} />}
       {mode === CREATE && (<Form
         onCancel={() => back()}
         interviewers={props.interviewers}
@@ -82,7 +82,7 @@ return (
       {mode === SHOW && (
         <Show
           student={props.interview.student}
-          interviewer={props.interview.interviewer.name}
+          interviewer={props.interviewer}
           onDelete={deleting}
           onEdit={editing}
         />
