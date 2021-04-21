@@ -44,6 +44,7 @@ const state = {
   }
 };
 
+
 test("getInterview returns an object with the interviewer data", () => {
   const result = getInterview(state, state.appointments["3"].interview);
   expect(result).toEqual(

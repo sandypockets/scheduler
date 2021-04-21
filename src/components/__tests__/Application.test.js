@@ -1,13 +1,8 @@
 import React from "react";
-
-import { render, cleanup, waitForElement, getByText } from "@testing-library/react";
-
 import Application from "components/Application";
-
 import axios from "axios";
-
+import { render, cleanup, waitForElement, getByText } from "@testing-library/react";
 afterEach(cleanup);
-
 
 
 it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
