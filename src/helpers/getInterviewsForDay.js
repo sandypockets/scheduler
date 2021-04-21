@@ -5,6 +5,6 @@ export default function getInterviewersForDay(state, day) {
     return []
   } else {
     const detailedInterviewers = dayInterviewers.interviewers.map(id => state.interviewers[id])
-    return detailedInterviewers
+    return detailedInterviewers;
   }
 }
