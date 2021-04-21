@@ -11,9 +11,6 @@ import 'components/Appointment/styles.scss';
 
 
 export default function Appointment(props) {
-  console.log('Line 15', props);
-  console.log('Line 16', props.bookInterview);
-
   const SHOW = 'SHOW';
   const EMPTY = 'EMPTY';
 
@@ -61,7 +58,6 @@ export default function Appointment(props) {
     back()
   };
 
-console.log("LINE 64 ------", props)
 return (
     <article className='appointment' data-testid="appointment">
       <Header time={props.time} />
