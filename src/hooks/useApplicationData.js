@@ -57,7 +57,7 @@ export default function useApplicationData() {
           ...state.appointments,
           [id]: appointment
         };
-        const days = state.days.map(day => {
+        state.days.map(day => {
           return (create ? day.id === confirmDay(id) ? { ...day, spots: day.spots - 1 } : { ...day } : { ...day })
         });
         setState(prev => {
