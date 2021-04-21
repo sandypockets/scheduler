@@ -41,10 +41,6 @@ export default function Form(props) {
             value={currentName}
             onChange={(event) => setName(event.target.value)}
             onSubmit={(e) => {e.preventDefault()}}
-
-            data-testid="student-name-input"
-
-            /*This must be a controlled component*/
           />
         </form>
 
