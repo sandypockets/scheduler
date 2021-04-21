@@ -44,5 +44,7 @@ describe("Booking Actions", () => {
       .get('.appointment__card > .appointment__actions > :nth-child(2)').click()
     // Sees that the appointment slot is empty
       .get(':nth-child(1) > .appointment__add')
+      .contains(".appointment__card--show", "Archie Cohen")
+      .should("not.exist");
   })
 })
