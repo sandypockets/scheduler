@@ -78,7 +78,7 @@ return (
       {mode === SHOW && (
         <Show
           student={props.interview.student}
-          interviewer={props.interviewer}
+          interviewer={props.interview.interviewer.name}
           onDelete={deleting}
           onEdit={editing}
         />
